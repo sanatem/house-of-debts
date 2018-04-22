@@ -6,23 +6,39 @@ import client from '../services/client'
 
 export default class DepositScreen extends React.Component {
 
-  state = {
-      email: ''
-    }
-
   handleDepositPress = () => {
-    //client.postDeposit(this.state.email);
+    client.postDeposit({
+      username: this.state.email,
+      house: this.state.hashtag,
+      reason: this.state.reason,
+      amount: this.state.amount
+     });
+
     this.props.navigation.navigate('Home', {email: this.state.email})
   }
+
+  handleHashtag = (text) => this.setState({ hashtag: text })
+  handleReason = (text) =>  this.setState({ reason: text })
+  handleAmount = (text) =>  this.setState({ amount: text })
+
+
+  componentWillMount() {
+    /* Read the params from the Login Screen state */
+    const { params } = this.props.navigation.state;
+    const email = params ? params.email : null;
+    this.setState({email: email});
+
+  }
+
   render(){
 
     return (
       <View style={styles.container}>
         <Text> Deposit view</Text>
         <Text> Ingrese los siguientes campos </Text>
-        <TextInput style={styles.input} placeholder="Ingrese monto" />
-        <TextInput style={styles.input} placeholder="Ingrese casa" />
-        <TextInput  style={styles.input} placeholder="Ingrese descripcion" />
+        <TextInput style={styles.input} placeholder="Ingrese monto" onChangeText={this.handleAmount}/>
+        <TextInput style={styles.input} placeholder="Ingrese casa" onChangeText={this.handleHashtag} />
+        <TextInput  style={styles.input} placeholder="Ingrese descripcion" onChangeText={this.handleReason} />
         <Button title="Depositar" onPress={this.handleDepositPress} />
       </View>
       );
