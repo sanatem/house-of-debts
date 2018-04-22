@@ -2,26 +2,18 @@ import React from 'react';
 
 import {Text, View, StyleSheet, TextInput, Button} from 'react-native';
 
+import client from '../services/client'
+
 export default class DepositScreen extends React.Component {
 
-state = {
-    email: ''
-  }
+  state = {
+      email: ''
+    }
 
-handleDepositPress = () => { /*
-  fetch('https://mywebsite.com/endpoint/', {
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    firstParam: 'yourValue',
-    secondParam: 'yourOtherValue',
-  }),
-});    */
-this.props.navigation.navigate('Home', {email: this.state.email})
-}
+  handleDepositPress = () => {
+    //client.postDeposit(this.state.email);
+    this.props.navigation.navigate('Home', {email: this.state.email})
+  }
   render(){
 
     return (
@@ -32,8 +24,6 @@ this.props.navigation.navigate('Home', {email: this.state.email})
         <TextInput style={styles.input} placeholder="Ingrese casa" />
         <TextInput  style={styles.input} placeholder="Ingrese descripcion" />
         <Button title="Depositar" onPress={this.handleDepositPress} />
-        
-        
       </View>
       );
   }
@@ -49,7 +39,7 @@ const styles = StyleSheet.create({
 
   input:{
     padding: 10,
-    margin: 10, 
+    margin: 10,
     width:250,
   },
 });

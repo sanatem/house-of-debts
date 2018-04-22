@@ -1,7 +1,5 @@
 import React from 'react';
-
 import {StyleSheet, Button, TextInput, Text, View} from 'react-native';
-
 import { StackNavigator} from 'react-navigation';
 
 export default class LoginScreen extends React.Component {
@@ -20,7 +18,9 @@ export default class LoginScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text>House of Debts</Text>
+        <Text>
+          🏠 House of Debts 🏠
+        </Text>
         <TextInput style={styles.input} placeholder="Ingrese su email" onChangeText={this.handleEmail}/>
         <Button title="Ingresar" onPress={this.handlePress}/>
       </View>
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   },
   input:{
     padding: 10,
-    margin: 10, 
+    margin: 10,
     width:250,
+    textAlign:'center',
   },
 });
