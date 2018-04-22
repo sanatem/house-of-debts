@@ -1,13 +1,29 @@
-import { React } from "react";
+import React from "react";
 
-import { Text } from "react-native";
+import { Button, Text, View, StyleSheet } from "react-native";
 
 export default class Debt extends React.Component {
 
-render () {
+  render () {
+
     return (
-        <Text style={{ fontWeight: 'bold' }}>{'#' + this.props.hashtag + '  $' + this.props.balance}</Text>
+        <View style={styles.view}>
+          <Text style={{ fontWeight: 'bold' }}>
+            {'#' + this.props.hashtag + '  $' + this.props.balance}
+          </Text>
+          <Button title="💸" onPress={ this.props.handleButtonPress }/>
+        </View>
     );
-}
+  }
 
 }
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'powderblue',
+    justifyContent: 'center',
+    fontSize: 14
+  }
+});
