@@ -21,7 +21,7 @@ export default class LoginScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>House of Debts</Text>
-        <TextInput placeholder="Ingrese su email" onChangeText={this.handleEmail}/>
+        <TextInput style={styles.input} placeholder="Ingrese su email" onChangeText={this.handleEmail}/>
         <Button title="Ingresar" onPress={this.handlePress}/>
       </View>
       );
@@ -35,5 +35,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input:{
+    padding: 10,
+    margin: 10, 
+    width:250,
   },
 });
