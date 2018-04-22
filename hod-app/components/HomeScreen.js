@@ -23,10 +23,9 @@ export default class HomeScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text> Main menu !!</Text>
-        <Text> Welcolme {this.state.email}</Text>
-        <Button title="Deposit $$" onPress={ this.handleDepositPress }/>
-        <Button title="My Debts" onPress={ this.handleMyDebtsPress }/>
+        <Text style={styles.marginBotMd}> Welcolme {this.state.email}</Text>
+        <Button style={styles.marginBotXlg} title="Deposit $$" onPress={ this.handleDepositPress }/>
+        <Button style={styles.marginBotXlg} title="My Debts" onPress={ this.handleMyDebtsPress }/>
       </View>
       );
   }
@@ -38,5 +37,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  marginBotXlg: {
+    marginBottom: 40
+  }, 
+  marginBotMd: {
+    marginBottom: 20
   },
 });

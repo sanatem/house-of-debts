@@ -3,14 +3,12 @@ import {HOD_API} from "../config/environment";
 export default {
   /** This get the different debts for an user */
   getBalance(email) {
-    return fetch(HOD_API+'/balance?email='+email)
+    console.log(email);
+    return fetch(HOD_API+'/balance?username='+email)
       .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson.balance;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .catch((error) => {
+        console.error(error);
+      });
   },
 
   /** This post a new deposit */

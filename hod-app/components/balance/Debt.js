@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'powderblue',
     justifyContent: 'center',
     fontSize: 14
   }

@@ -1,8 +1,7 @@
 import React from 'react';
 import Debt from './balance/Debt';
+import client from '../services/client'
 import {View, Text, Button, FlatList, StyleSheet} from 'react-native';
-
-const mock = [{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111},{'hash-tag':'abc','balance': 111}];
 
 export default class BalanceScreen extends React.Component {
 
@@ -14,29 +13,33 @@ export default class BalanceScreen extends React.Component {
 
   constructor () {
     super()
-    this.state = { balances: [] }
+    this.state = { balances: [{hash_tag:"sasa",balance:1}] }
   }
 
   _render = {
-    item: ({item}) => <Debt hashtag={item['hash-tag']} balance={item['balance']} handleButtonPress= {this.handleDepositPress}/>
+    item: ({item}) => (<Debt hashtag={item.hash_tag} balance={item.balance} handleButtonPress= {this.handleDepositPress}/>)
   }
 
   componentWillMount() {
     var result = [];
 
-    mock.forEach((m) => {
-      result.push({
-        data: [m["hash-tag"],m['balance']]
-      }) //fetch
-    });
+    const { params } = this.props.navigation.state;
+    const email = params ? params.email : null;
+    this.setState({email: email});
 
-    this.state.balances = [...result];
-
+    client.getBalance(email).then((responseJson) => {
+      responseJson.balances.forEach((balance) => 
+        result.push(balance)
+      )
+      this.setState({balances: [...result]});
+      console.log([...result]);
+      console.log("sasa",this.state.balances);
+    }); 
   }
 
   render() {
-     return this.state.balances.length !== 0 ?  (<View style={styles.view}><FlatList data={mock} renderItem={this._render.item}  /></View>) : null;
-  }s
+     return(<View style={styles.view}><FlatList data={this.state.balances} extraData={this.state} renderItem={this._render.item}  /></View>);
+  }
 }
 
 const styles = StyleSheet.create({
