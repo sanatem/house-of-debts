@@ -1,6 +1,5 @@
 import React from 'react';
-import LoginScreen from './components/LoginScreen';
-import HomeScreen from './components/HomeScreen';
+import {LoginScreen, HomeScreen, DepositScreen, BalanceScreen} from './components/index.js';
 import { StackNavigator} from 'react-navigation';
 
 const Root = StackNavigator({
@@ -9,7 +8,13 @@ const Root = StackNavigator({
   },
   Home: {
     screen: HomeScreen,
-  }
+  },
+  Deposit: {
+    screen: DepositScreen,
+  },
+  Balance: {
+    screen: BalanceScreen,
+  },
 });
 
 
