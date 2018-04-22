@@ -12,8 +12,10 @@ export default class LoginScreen extends React.Component {
 
   handleEmail = (text) => this.setState({email: text })
 
-  handlePress = () => this.props.navigation.navigate('Home')
-
+  handlePress = () => {
+    console.log(this.state.email);
+    this.props.navigation.navigate('Home', {email: this.state.email})
+  }
 
   render(){
     return (
